@@ -1,1 +1,1 @@
-# Sensor-Project_Smart-Coster
+# Sensor Projec 1: Smart Coster

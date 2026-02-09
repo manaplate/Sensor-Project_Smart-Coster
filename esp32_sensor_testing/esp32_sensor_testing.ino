@@ -4,10 +4,12 @@
 #include <time.h>
 
 // ------------------- USER SETTINGS -------------------
-const char* ssid     = "TrueGigatexFiber_2.4G_vwv"; 
-const char* password = "nfSNu2xj"; 
+//const char* ssid     = "TrueGigatexFiber_2.4G_vwv"; 
+//const char* password = "nfSNu2xj"; 
+const char* ssid     = "Goldfisb"; 
+const char* password = "plasalmon";
 
-const char* scriptURL = "https://script.google.com/macros/s/AKfycbwzTI38XyFuBjybpulVEyUio-W4mISWr2SF4qZBHJs0Y-hpyesv3ZG9-fdFG0VUaK33Fg/exec";
+const char* scriptURL = "https://script.google.com/macros/s/AKfycbxZP2MThwEjTbaNo6QTxhHTp52B6TZ5XIAF59nicunOujnwzWJamrCmdbfzkvQtQxKW9A/exec";
 
 // GPIO 0 is usually the onboard BOOT button
 const int buttonPin = 0;  
@@ -25,7 +27,7 @@ unsigned long debounceDelay = 10; // Change sensitivity
 
 // Timer Variables
 unsigned long lastTime = 0;
-unsigned long timerDelay = 60000; // Change update interval
+unsigned long timerDelay = 60000/2; // Change update interval
 
 void setup() {
   Serial.begin(115200);
@@ -110,9 +112,12 @@ void sendDataToGoogleSheet(bool reset) {
 
       String method = (reset) ? "reset" : "append";
       String currentTime = getFormattedTime();
+
+      int placeholderReading = random(1, 100);
       
-      String payload = "{\"method\": \"" + method + "\"," + 
-                       "\"timestamp\": \"" + currentTime + "\"}";
+      String payload = "{\"method\": \"" + method + "\"," +
+                        "\"timestamp\": \"" + currentTime + "\"," + 
+                        "\"placeholderReading\": \"" + String(placeholderReading) + "\"}";
 
       Serial.print("Posting Payload: ");
       Serial.println(payload);
